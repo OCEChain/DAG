@@ -7,7 +7,7 @@
 //
 
 //#include <algorithm>
-#include "directedacyclicgraph.h"
+#include "DirectedAcyclicGraph.h"
 #include "simpleidentifier.h"
 
 long makeMergedClusterId() { return Id::makeId(enumDataType::CLUSTER, enumSubType::MERGED); }

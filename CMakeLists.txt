@@ -25,15 +25,17 @@ endif()
 
 
 include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/graphtools
+        ${CMAKE_CURRENT_SOURCE_DIR}/papas
         ${CMAKE_CURRENT_SOURCE_DIR}/examples
 )
-#file(GLOB headers examples/*.h graphtools/directedacyclicgraph.h)
+#file(GLOB headers examples/*.h papas/DirectedAcyclicGraph.h)
 add_executable(DAG_id examples/DAG_example_longidnode.cpp   examples/simpleidentifier.cpp )
 add_executable(DAG_poly examples/DAG_example_polymorphic.cpp )
+add_executable(DAG_pair examples/example_dag_pair.cpp )
 
 target_link_libraries(DAG_id )
 target_link_libraries(DAG_poly )
+target_link_libraries(DAG_pair )
 
 #If the Boost Package is found then the fianl example can be compiled.
 #this should come from env variables
@@ -44,4 +46,4 @@ include_directories( ${Boost_INCLUDE_DIRS} )
 add_executable(DAG_any examples/DAG_example_boostany.cpp  )
 target_link_libraries(DAG_any )
 endif()
-message(STATUS, "alice2")
+
