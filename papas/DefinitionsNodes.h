@@ -9,17 +9,15 @@
 #ifndef DefinitionsNodes_h
 #define DefinitionsNodes_h
 
+#include "Id.h"
+#include "DirectedAcyclicGraph.h"
 #include <map>
 #include <vector>
-#include "directedacyclicgraph.h"
-#include "Id.h"
 namespace papas {
 
 typedef DAG::Node<Id::Type> PFNode;
 typedef std::map<Id::Type, PFNode> Nodes;
-extern Nodes emptyNodes; //TODO check
-extern const Nodes emptyconstNodes; //TODO check
 
-} // end namespace papas
+}  // end namespace papas
 
 #endif /* DefinitionsNodes_h */

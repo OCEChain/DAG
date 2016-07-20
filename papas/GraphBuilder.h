@@ -1,8 +1,8 @@
 #ifndef RECONSTRUCTION_GRAPHBUILDER_H
 #define RECONSTRUCTION_GRAPHBUILDER_H
 
-#include "DefinitionsNodes.h"
 #include "DefinitionsCollections.h"
+#include "DefinitionsNodes.h"
 
 namespace papas {
 
@@ -39,10 +39,10 @@ public:
    */
   GraphBuilder(Ids ids, Edges& edges);
   GraphBuilder& operator=(const GraphBuilder&);
-  ///TODO add comment re arguments below what is IDs
+  /// TODO add comment re arguments below what is Ids
   const std::vector<Ids> subGraphs() const {
     return m_subGraphs;
-  };                             ///<return the vector of Ids of the resulting subgraphs;
+  };  ///<return the vector of Ids of the resulting subgraphs;
 protected:
   void sortIds(Ids& ids);  ///<sorted by energy
   Edges& m_edges;
@@ -51,5 +51,5 @@ private:
   Ids m_elementIds;    ///<uniqueids to be grouped into subgraphs
   Nodes m_localNodes;  ///<local nodes used in building subgraphs
 };
-} // end namespace papas
+}  // end namespace papas
 #endif /* GraphBuilder_h */
