@@ -8,11 +8,14 @@ Installation
 
 download from github
 
+source init.sh
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=../install ..
 make install
 tests/tests
+
+optional arguments -Ddag_documentation=ON -Ddag_example=ON
 
 For Xcode project use: cmake -G Xcode ..
 
