@@ -1,11 +1,10 @@
-#ifndef TOOLS_FLOODFILL_H
-#define TOOLS_FLOODFILL_H
-/** @class   tools::FloodFill.h
+#ifndef DAG_FLOODFILL_H
+#define DAG_FLOODFILL_H
+/** @class   DAG::FloodFill
  *
  *  @brief FloodFill creates blocks of connected elements
  *
- *
- *   FLOODFILL uses the DAG BFSVisitor to find connected groups of nodes
+ *   FLOODFILL uses the DAG BFSVisitor to find groups of connected nodes
  *
  *  Example usage:
  *
@@ -38,7 +37,7 @@
 #include <map>
 
 namespace DAG {
-
+///FloodFill creates blocks of connected elements
 template <typename T>  /// T is what goes inside of a Node eg a long Id
 class FloodFill {
 
@@ -49,7 +48,7 @@ class FloodFill {
 
 public:
   FloodFill();
-  // each element in the return vector is a group of connected nodes
+  /// Return a vector that itself contains vectors of connected nodes
   std::vector<Nodevector> traverse(Nodemap&);
 
 private:

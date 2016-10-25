@@ -1,49 +1,93 @@
-#Set compiler flags
-
-#Set compiler flags
-
-#mkdir build
-#cd build
-#cmake -G Xcode ..
-#cmake ..
 
 cmake_minimum_required(VERSION 3.3)
-project(DAG_examples)
+project(dag)
 
-#Set compiler flags
-include(CheckCXXCompilerFlag)
-CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
-CHECK_CXX_COMPILER_FLAG("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
+set(DAG_MAJOR_VERSION 2)
+set(DAG_MINOR_VERSION 2)
+set(DAG_PATCH_VERSION 2)
+set(DAG_VERSION
+  ${DAG_MAJOR_VERSION}.${DAG_MINOR_VERSION}.${DAG_PATCH_VERSION})
 
-if(COMPILER_SUPPORTS_CXX11)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-elseif(COMPILER_SUPPORTS_CXX0X)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-else()
-message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
+
+if(APPLE)
+  set(CMAKE_SHARED_LIBRARY_SUFFIX ".so")
+  set(CMAKE_MACOSX_RPATH 1)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
+endif(APPLE)
+
+#--- Declare options -----------------------------------------------------------
+#option(dag_documentation "Whether or not to create doxygen doc target.")
+#option(dag_example "Whether or not to create examples")
+
+add_definitions(-Wno-unused-variable -Wno-unused-parameter)
+#
+#--- enable unit testing capabilities ------------------------------------------
+include(CTest)
+
+add_subdirectory(dag)
+add_subdirectory(tests)
+
+if(dag_example)
+  add_subdirectory(examples)
+endif(dag_example)
+
+if(dag_documentation)
+  include(cmake/dagDoxygen.cmake)
 endif()
 
+# CMake files
+# ===============================
+set(DEF_INSTALL_CMAKE_DIR cmake)
+set(INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH
+  "Installation directory for CMake files")
 
-include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/papas
-        ${CMAKE_CURRENT_SOURCE_DIR}/examples
-)
-#file(GLOB headers examples/*.h papas/DirectedAcyclicGraph.h)
-add_executable(DAG_id examples/DAG_example_longidnode.cpp   examples/simpleidentifier.cpp )
-add_executable(DAG_poly examples/DAG_example_polymorphic.cpp )
-add_executable(DAG_pair examples/example_dag_pair.cpp )
+# Make relative paths absolute (needed later on)
+foreach(p INCLUDE CMAKE)
+  set(var INSTALL_${p}_DIR)
+  if(NOT IS_ABSOLUTE "${${var}}")
+    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
+  endif()
+endforeach()
 
-target_link_libraries(DAG_id )
-target_link_libraries(DAG_poly )
-target_link_libraries(DAG_pair )
+# Export the package for use from the build-tree
+# (this registers the build-tree with a global CMake-registry)
+#export(PACKAGE dag)
 
-#If the Boost Package is found then the fianl example can be compiled.
-#this should come from env variables
-#set(BOOST_ROOT /usr/local/boost_1_59_0)
-find_package(Boost)
-if (Boost_FOUND)
-include_directories( ${Boost_INCLUDE_DIRS} )
-add_executable(DAG_any examples/DAG_example_boostany.cpp  )
-target_link_libraries(DAG_any )
-endif()
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/DagVersion.h
+               ${CMAKE_CURRENT_BINARY_DIR}/DagVersion.h )
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/DagVersion.h
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/include/dag )
+
+ ## Create the dagConfig.cmake and dagConfigVersion files
+ #file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}"
+ #   "${INSTALL_INCLUDE_DIR}")
+ ## ... for the build tree
+ #set(CONF_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}" "${PROJECT_BINARY_DIR}")
+ #configure_file(dagConfig.cmake.in
+ #  "${PROJECT_BINARY_DIR}/dagConfig.cmake" @ONLY)
+ ## ... for the install tree
+
+set(CONF_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/")
+configure_file(dagConfig.cmake.in
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/dagConfig.cmake" @ONLY)
+# ... for both
+configure_file(dagConfigVersion.cmake.in
+  "${PROJECT_BINARY_DIR}/dagConfigVersion.cmake" @ONLY)
+
+# Install the dagConfig.cmake and dagConfigVersion.cmake
+install(FILES
+  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/dagConfig.cmake"
+  "${PROJECT_BINARY_DIR}/dagConfigVersion.cmake"
+  DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
+
+
+
+
+
+
+
+
+
 

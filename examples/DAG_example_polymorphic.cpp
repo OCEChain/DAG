@@ -5,7 +5,7 @@
 //  Copyright © 2015 CERN. All rights reserved.
 //
 
-#include "DirectedAcyclicGraph.h"
+#include "dag/DirectedAcyclicGraph.h"
 #include <algorithm>
 #include <iostream>
 

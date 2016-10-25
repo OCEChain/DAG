@@ -1,0 +1,8 @@
+# - Config file for the DAG package
+# It defines the following variables
+#  DAG_INCLUDE_DIRS - include directories for DAG
+ 
+# Compute paths
+get_filename_component(DAG_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(DAG_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+ 
