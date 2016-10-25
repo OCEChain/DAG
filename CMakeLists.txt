@@ -18,8 +18,8 @@ if(APPLE)
 endif(APPLE)
 
 #--- Declare options -----------------------------------------------------------
-#option(dag_documentation "Whether or not to create doxygen doc target.")
-#option(dag_example "Whether or not to create examples")
+option(dag_documentation "Whether or not to create doxygen doc target.")
+option(dag_example "Whether or not to create examples")
 
 add_definitions(-Wno-unused-variable -Wno-unused-parameter)
 #
