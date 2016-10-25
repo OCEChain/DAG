@@ -1,0 +1,16 @@
+# - Config file for the DAG package
+# It defines the following variables
+#  DAG_INCLUDE_DIRS - include directories
+#  DAG_LIBRARIES    - libraries to link against
+#  DAG_BINARY_DIR   - binary directory
+
+# Compute paths
+get_filename_component(DAG_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+get_filename_component(DAG_INCLUDE_DIRS "${DAG_CMAKE_DIR}/../include" ABSOLUTE)
+get_filename_component(DAG_BINARY_DIR "${DAG_CMAKE_DIR}/../bin" ABSOLUTE)
+
+
+INCLUDE( FindPackageHandleStandardArgs )
+FIND_PACKAGE_HANDLE_STANDARD_ARGS( DAG  DEFAULT_MSG "" DAG_INCLUDE_DIRS  "")
+
+
