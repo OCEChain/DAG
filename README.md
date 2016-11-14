@@ -4,14 +4,13 @@ The DAG tool supports traversal of a [Directed Acyclic Graph](https://en.wikiped
 The tool is implemented in C++ using a templated Node class alongside a visitor algorithm.
 A Floodfill algorithm is also provided which groups together nodes which are connected and returns a vector which contains vectors of connected nodes.
 
+<img src="./doc/event_dag.png" alt="Drawing" style="width: 120px;"/>
 
-![Output Image](./doc/event_dag.png)
 
 ## Installation
 
 Download from github:
-	git@github.com:alicerobson/dag.git
-
+  https://github.com/HEP-FCC/dag
 
 ```bash
 source init.sh
@@ -47,7 +46,7 @@ Nodes may have multiple children and /or multiple parents.
 A search may be for children, parents or undirected links.
 An undirected search finds all nodes that are connected to the start node(s).
 
-New visiting algorithms can be created by the user by deriving from the Visitor class interface ([BFSVisitor](https://github.com/alicerobson/dag/blob/master/dag/dag/DirectedAcyclicGraph.h#L119) is an example of this.)
+New visiting algorithms can be created by the user by deriving from the Visitor class interface ([BFSVisitor](https://github.com/HEP-FCC/dag/blob/master/dag/dag/DirectedAcyclicGraph.h#L119) is an example of this.)
 
 ## Example usage
 
@@ -81,6 +80,3 @@ cmake -DCMAKE_INSTALL_PREFIX=../install  -Ddag_example=ON ..
 ### Use with fcc-edm
 For an example of fcc-edm that can build the DAG from EDM particles using an installation of the DAG header see
 https://github.com/jlingema/fcc-edm/blob/graph/utilities/ParticleGraph.h
-
-installation:
-/afs/cern.ch/exp/fcc/sw/snapshot/dag/
