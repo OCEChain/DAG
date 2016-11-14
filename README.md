@@ -4,7 +4,7 @@ The DAG tool supports traversal of a [Directed Acyclic Graph](https://en.wikiped
 The tool is implemented in C++ using a templated Node class alongside a visitor algorithm.
 A Floodfill algorithm is also provided which groups together nodes which are connected and returns a vector which contains vectors of connected nodes.
 
-<img src="./doc/event_dag.png" alt="Drawing" style="width: 120px;"/>
+<img src="./doc/event_dag.png" alt="Drawing" style="width: 50px;"/>
 
 
 ## Installation
