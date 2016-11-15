@@ -31,13 +31,13 @@ For Xcode project use: cmake -G Xcode ..
 
 ### Nodes
 
-The Node class is templated Node<T> where T is intended to be either an identifier or the item of interest.
+The Node class is templated,  Node\<T\> where T is intended to be either an identifier or the item of interest.
 The Node class may not be const, but the thing it contains (T) may be set to be a const object
 
 Nodes may contain
  * simple structures such as an int, long or pair
- * with polymorphic classes ( T is set to &Base of the Base class)
- * with Boost:Any  which allows direct insertion into the Nodes of any mixed set of class items
+ * polymorphic classes ( T is set to &Base of the Base class)
+ * Boost:Any  which allows direct insertion into the Nodes of any mixed set of class items
 	  here T= const Boost::Any&
 
 ### Directed Acyclic Graph
@@ -68,9 +68,9 @@ std::cout << "Node: " << n->value()  << std::endl;
 ```
 
 Examples are provided for the following cases
- 1. T is an Int identifier (T is set to a const int identifier)
+ 1. T is an integer identifier (T is set to a const int identifier)
  2. T is a pair
- 3. Polymorphic classes
+ 3. Polymorphic classes.
  	T is set to be const &Base and the nodes include Base and Middle (derives from Base) instances.
  	Note that &Base is used for T in order to avoid copying the classes and in order that polymorphism is available
 
