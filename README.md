@@ -9,8 +9,7 @@ A Floodfill algorithm is also provided which groups together nodes which are con
 
 ## Installation
 
-Download from github:
-  https://github.com/HEP-FCC/dag
+
 
 ```bash
 source init.sh
@@ -78,5 +77,5 @@ The examples can be installed by setting the optional CMake flag:-
 cmake -DCMAKE_INSTALL_PREFIX=../install  -Ddag_example=ON ..
 
 ### Use with fcc-edm
-For an example of fcc-edm that can build the DAG from EDM particles using an installation of the DAG header see
-https://github.com/jlingema/fcc-edm/blob/graph/utilities/ParticleGraph.h
+For an example of fcc-edm that can build the DAG from EDM particles using an installation of the DAG header see ParticleGraph.h
+
